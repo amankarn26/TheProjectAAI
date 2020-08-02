@@ -70,7 +70,12 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4">Login</CButton>
+                        
+                      </CCol>
+                      <CCol xs="6" className="text-right">
+                        <Link to="/homepage">
+                          <CButton color="primary" className="px-4">Login</CButton>
+                        </Link>
                       </CCol>
                     </CRow>
                   </CForm>
@@ -79,9 +84,8 @@ const Login = () => {
               <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h1>The Project AAI</h1>
+                    <h2>Good {goodWish}</h2>
                     <p>{goodQuote}</p>
-                    <h3>Good {goodWish}</h3>
                   </div>
                 </CCardBody>
               </CCard>
