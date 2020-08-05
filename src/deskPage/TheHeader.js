@@ -14,7 +14,7 @@ import {
 import CIcon from '@coreui/icons-react'
 
 // routes config
-import routes from '../routes'
+import routes from '../mainRoutes'
 
 import { 
   TheHeaderDropdown,
@@ -49,9 +49,7 @@ const TheHeader = () => {
         className="ml-3 d-md-down-none"
         onClick={toggleSidebar}
       />
-      <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo"/>
-      </CHeaderBrand>
+      <CHeaderBrand className="mx-auto d-lg-none" to="/"></CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
@@ -89,7 +87,7 @@ const TheHeader = () => {
               <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
             </CLink>
             <CLink className="c-subheader-nav-link" href="#">
-              <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
+              &nbsp;+ Add New
             </CLink>
           </div>
       </CSubheader>

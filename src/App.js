@@ -40,6 +40,7 @@ class App extends Component {
               <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
               <Route path="/" name="HomePage" render={props => <TheMainLayout {...props}/>} />
             </Switch>
+            {/* <Redirect from="/" to="/homepage" /> */}
           </React.Suspense>
       </HashRouter>
     );

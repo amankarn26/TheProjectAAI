@@ -4,16 +4,19 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import { CContainer, CFade } from '@coreui/react'
+import { CContainer, CFade, CSpinner } from '@coreui/react'
 
 // routes config
-import routes from '../routes'
+import routes from '../mainRoutes'
   
 const loading = (
   <div className="loadingBoxLite">
-    <div className="loadingArea">
+    <div className="loadingAreaLite">
       <div>
-        Loading...
+        <CSpinner
+          color="primary"
+          style={{width:'4rem', height:'4rem'}}
+        />
       </div>
     </div>
   </div>
@@ -39,7 +42,7 @@ const TheContent = () => {
                   )} />
               )
             })}
-            <Redirect from="/" to="/dashboard" />
+            <Redirect from="/" to="/404" />
           </Switch>
         </Suspense>
       </CContainer>
