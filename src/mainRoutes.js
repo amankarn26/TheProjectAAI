@@ -22,6 +22,10 @@ const ViewPayment = lazy(() => import('./pages/payment/paymentShow'))
 
 const ViewUser = lazy(() => import('./pages/user/userData'))
 
+const ViewCoupon = lazy(() => import('./pages/coupon/allCoupon'))
+
+const ViewCharges = lazy(() => import('./pages/charges/charges'))
+
 
 
 const routes = [
@@ -51,6 +55,10 @@ const routes = [
   { path: '/operation/payment', name: 'All Payments', component: ViewPayment, exact: true },
 
   { path: '/operation/user', name: 'All Users', component: ViewUser, exact: true },
+
+  { path: '/operation/discount', name: 'All Coupon', component: ViewCoupon, exact: true },
+
+  { path: '/operation/charges', name: 'Delivery charges', component: ViewCharges, exact: true },
 ]
 
 export default routes;
