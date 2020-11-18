@@ -112,6 +112,12 @@ export default [
     icon: 'cil-calendar',
   },
   {
+    _tag: 'CSidebarNavItem',
+    name: 'App Offers',
+    to: '/operation/offers',
+    icon: 'cil-cursor',
+  },
+  {
     _tag: 'CSidebarNavDropdown',
     name: 'Restaurant',
     route: '/operation/Restraint',
@@ -126,6 +132,11 @@ export default [
         _tag: 'CSidebarNavItem',
         name: 'Working duration',
         to: '/operation/Restraint/details',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Busy Slots',
+        to: '/operation/Restraint/busy',
       }
     ],
   },
