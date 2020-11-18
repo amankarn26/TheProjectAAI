@@ -76,7 +76,7 @@ const TheHeader = () => {
           routes={routes} 
         />
           <div className="d-md-down-none mfe-2 c-subheader-nav">
-            <CLink className="c-subheader-nav-link"href="#">
+            <CLink className="c-subheader-nav-link" to="/pending/ongoing">
               <CIcon name="cil-speech" alt="Settings" />
             </CLink>
             <CLink 
@@ -85,9 +85,6 @@ const TheHeader = () => {
               to="/dashboard"
             >
               <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
-            </CLink>
-            <CLink className="c-subheader-nav-link" href="#">
-              &nbsp;+ Add New
             </CLink>
           </div>
       </CSubheader>
