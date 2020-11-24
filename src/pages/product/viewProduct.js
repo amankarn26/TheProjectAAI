@@ -23,9 +23,9 @@ import {
 
 import mobileIcon from '../../includes/imgs/svg/mobile.svg'
 
-const getSwitch = status => {
-    if (status === 'Active') return <CSwitch className={'mx-1 floatRight'} variant={'3d'} id='PActive' color={'success'} defaultChecked labelOn={'\u2713'} labelOff={'\u2715'}/>
-    else return <CSwitch className={'mx-1 floatRight'} variant={'3d'} id='PActive' color={'success'} labelOn={'\u2713'} labelOff={'\u2715'}/>
+const getSwitch = (status, handleChange) => {
+    if (status === 'Active') return <CSwitch className={'mx-1 floatRight'} name="selectStatus" onChange={handleChange} variant={'3d'} id='PActive' color={'success'} defaultChecked labelOn={'\u2713'} labelOff={'\u2715'}/>
+    else return <CSwitch className={'mx-1 floatRight'} variant={'3d'} id='PActive' name="selectStatus" onChange={handleChange} color={'success'} labelOn={'\u2713'} labelOff={'\u2715'}/>
 }
 
 
@@ -41,12 +41,16 @@ class Product extends Component {
             PPrice : 0,
             selectStatus : 'Active',
             selectImage : mobileIcon,
+            newImage : null,
             isLoaded : false,
             ReceivedData : {}
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.exitSubmit = this.exitSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.dataUpdated = this.dataUpdated.bind(this)
+        this.photoUpload = this.photoUpload.bind(this)
     }
 
     componentDidMount() {
@@ -89,22 +93,77 @@ class Product extends Component {
         const value = target.value;
         const name = target.name;
 
-        this.setState({
-        [name]: value
-        });
+        if(name === "selectStatus") {
+            if (this.state.selectStatus === "Active") {
+                this.setState({
+                    selectStatus: "Inactive"
+                })
+            } else {
+                this.setState({
+                    selectStatus: "Active"
+                })
+            }
+        } 
+        else if(name === "selectImage") {
+            this.setState({
+                newImage : target.files[0]
+            })
+        }
+        else {
+            this.setState({
+                [name]: value
+            });
+        }
     }
 
     handleSubmit() {
+        let url = this.props.location.YeID
+
+        axios.patch(url, {
+            name: this.state.PName,
+            description: this.state.PDescription,
+            price: this.state.PPrice,
+            status: this.state.selectStatus
+        })
+        .then(response => {
+            this.dataUpdated()
+        })
+        .catch(function (error) {
+            alert(error);
+        });
+
+    }
+
+    dataUpdated() {
         this.props.history.push("#/operation/product")
     }
 
     exitSubmit() {
-        this.props.history.push("/operation/product")
+        this.props.history.push("#/operation/product")
     }
 
     photoUpload() {
-        alert("Image Uploaded Successfully.")
-        document.getElementById('file-input').value = null
+        // let upload_image_ref = document.getElementById('file-input')
+        // let value_image = upload_image_ref.value
+        // alert("Image=" + value_image)
+        // upload_image_ref.value = null
+        // this.props.history.push("#/operation/product")
+
+        console.log(this.state.newImage)
+
+        const fd = new FormData();
+        fd.append('avatar',this.state.newImage, this.state.newImage.name);
+
+        let url = this.props.location.YeID
+
+        axios.patch(url, fd)
+        .then(response => {
+            console.log(response);
+            // this.dataUpdated()
+        })
+        .catch(function (error) {
+            alert(error);
+        });
     }
  
     render() {
@@ -193,7 +252,7 @@ class Product extends Component {
                                                             <CLabel htmlFor="PActive">Status</CLabel>
                                                         </CCol>
                                                         <CCol xs="12" md="9">
-                                                            {getSwitch(this.state.selectStatus)}
+                                                            {getSwitch(this.state.selectStatus, this.handleChange)}
                                                         </CCol>
                                                     </CFormGroup>
                                                     <div className="empty-sm"></div>
@@ -203,7 +262,7 @@ class Product extends Component {
                                         <div className="empty-xl"></div>
                                         <CRow>
                                             <CCol xs="12" lg="3">
-                                                <CInputFile id="file-input" name="file-input"/>
+                                                <CInputFile id="file-input" name="selectImage" onChange={this.handleChange} />
                                             </CCol>
                                             <CCol xs="12" lg="9">
                                                 <CRow>

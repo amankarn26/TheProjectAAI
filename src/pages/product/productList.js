@@ -175,6 +175,9 @@ class Product extends Component {
               <CCard>
                 <CCardHeader>
                     All Product are listed here.
+                    <Link to="/add/product">
+                      <CButton color="success" className="" style={{float:"right"}} >Add Product</CButton>
+                    </Link>
                 </CCardHeader>
                 <CCardBody>
                 <CDataTable

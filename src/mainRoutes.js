@@ -14,6 +14,7 @@ const ViewOrder = lazy(() => import('./pages/orders/viewOrder'))
 
 const AllProduct = lazy(() => import('./pages/product/productList'))
 const ViewProduct = lazy(() => import('./pages/product/viewProduct'))
+const addProduct = lazy(() => import('./pages/product/addProduct'))
 
 const AllEmployee = lazy(() => import('./pages/employee/allEmployee'))
 const ViewEmployee = lazy(() => import('./pages/employee/viewEmployee'))
@@ -47,6 +48,7 @@ const routes = [
   
   { path: '/operation', name: 'Operation', component: AllProduct, exact: true },
   { path: '/operation/product', name: 'All Products', component: AllProduct, exact: true },
+  { path: '/add/product', name: 'Add Product', component: addProduct, exact: true },
   { path: '/view/product', name: 'View Product', component: ViewProduct, exact: true },
 
   { path: '/operation/employee', name: 'All Employees', component: AllEmployee, exact: true },
