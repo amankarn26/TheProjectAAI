@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import {
   CCard,
   CCardBody,
@@ -36,7 +36,7 @@ const cartData = getData.map(data => {
 
 const fields = ['name','amount', 'quantity', 'total']
 
-const Tables = () => {
+const Tables = (props) => {
 
     
 
@@ -57,6 +57,11 @@ const Tables = () => {
         setDetails('Payment was not done by the user.')
         addToast()
     }
+
+    useEffect(() => {
+        let getId = props.location.YeID
+        alert("aman = " + getId)
+    }, [])
     
     
     const addToast = () => {

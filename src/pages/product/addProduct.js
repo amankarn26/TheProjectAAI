@@ -45,6 +45,7 @@ class Product extends Component {
         this.exitSubmit = this.exitSubmit.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.dataUpdated = this.dataUpdated.bind(this)
+        this.dataLoading = this.dataLoading.bind(this)
     }
 
     setData(data) {
@@ -97,6 +98,7 @@ class Product extends Component {
     handleSubmit() {
         let url = "https://coreapi.aaitheantiquebake.com/products"
 
+        this.dataUpdated()
         
         const fd = new FormData();
         fd.append('productImage',this.state.newImage, this.state.newImage.name)
@@ -118,6 +120,13 @@ class Product extends Component {
         this.setState({
             isLoaded : true,
             isMove : true
+        })
+    }
+
+    dataLoading() {
+        this.setState({
+            isLoaded : true,
+            isMove : false
         })
     }
 

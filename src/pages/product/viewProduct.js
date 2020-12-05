@@ -51,6 +51,7 @@ class Product extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.dataUpdated = this.dataUpdated.bind(this)
         this.photoUpload = this.photoUpload.bind(this)
+        this.dataLoading = this.dataLoading.bind(this)
     }
 
     componentDidMount() {
@@ -119,6 +120,8 @@ class Product extends Component {
     handleSubmit() {
         let url = this.props.location.YeID
 
+        this.dataLoading()
+
         axios.patch(url, {
             name: this.state.PName,
             description: this.state.PDescription,
@@ -138,6 +141,12 @@ class Product extends Component {
         this.props.history.push("#/operation/product")
     }
 
+    dataLoading() {
+        this.setState({
+            isLoaded : false
+        })
+    }
+
     exitSubmit() {
         this.props.history.push("#/operation/product")
     }
@@ -151,15 +160,16 @@ class Product extends Component {
 
         console.log(this.state.newImage)
 
+        this.dataLoading()
+
         const fd = new FormData();
-        fd.append('avatar',this.state.newImage, this.state.newImage.name);
+        fd.append('productImage',this.state.newImage, this.state.newImage.name);
 
         let url = this.props.location.YeID
 
         axios.patch(url, fd)
         .then(response => {
-            console.log(response);
-            // this.dataUpdated()
+            this.dataUpdated()
         })
         .catch(function (error) {
             alert(error);

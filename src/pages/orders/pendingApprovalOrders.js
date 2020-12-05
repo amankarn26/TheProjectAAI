@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {
   CBadge,
@@ -8,18 +8,20 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CButton
+  CButton,
+  CSpinner
 } from '@coreui/react'
 
-import usersData from '../api/orders/ongoingOrder'
+// import usersData from '../api/orders/ongoingOrder'
+import Axios from 'axios'
 
-const PendingData = usersData.filter(user => user.status === 'Pending')
+// const PendingData = usersData.filter(user => user.status === 'Pending')
 
 const getBadge = status => {
   switch (status) {
     case 'Active': return 'success'
     case 'Inactive': return 'secondary'
-    case 'Pending': return 'primary'
+    case 'Hold': return 'primary'
     case 'Banned': return 'danger'
     default: return 'warning'
   }
@@ -29,66 +31,144 @@ const getApproval = status => {
     switch (status) {
         case 'Active': return 'On Way'
         case 'Inactive': return 'Preparing'
-        case 'Pending': return 'Approval Pending'
+        case 'Hold': return 'Approval Pending'
         case 'Banned': return 'Rejected'
         default: return 'Unusual Data'
     }
 }
 
-// const TrimAddress = address => {
-//     if(address.length > 25) return address.substring(0,25)
-//     return address
-// }
-
-const fields = ['name','amount', 'address', 'status', 'action']
-
-const Tables = () => {
-  return (
-    <>
-      <CRow>
-        <CCol>
-          <CCard>
-            <CCardHeader>
-                Orders which need attention are listed here.
-            </CCardHeader>
-            <CCardBody>
-            <CDataTable
-              items={PendingData}
-              fields={fields}
-              itemsPerPage={10}
-              pagination
-              scopedSlots = {{
-                // 'address':
-                //     item => (
-                //         <td>
-                //             {TrimAddress(item.address)}...
-                //         </td>
-                //     )
-                // ,
-                'status':
-                  (item)=>(
-                    <td>
-                      <CBadge color={getBadge(item.status)}>
-                        {getApproval(item.status)}
-                      </CBadge>
-                    </td>
-                  ),
-                'action':
-                  ()=> (
-                    <td>
-                        <Link to="/view/order">
-                            <CButton block shape="pill" size="sm" color="primary" className="">View</CButton>
-                        </Link>
-                    </td>
-                  )
-              }}
-            />
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-    </>
-  )
+const TrimAddress = address => {
+    if(address.length > 40) return address.substring(0,40) + "......"
+    return address
 }
 
-export default Tables
+const fields = ['name','Amount', 'address', 'Status', 'action']
+
+
+export default class pendingApprovalOrders extends Component {
+
+  constructor() {
+    super()
+
+    this.state = {
+      isLoaded : false,
+      ReceivedData : {}
+    }
+
+    this.setData = this.setData.bind(this)
+  }
+
+  componentDidMount() {
+    this.fatchData()
+  }
+
+  fatchData() {
+    Axios.get('https://coreapi.aaitheantiquebake.com/order/all/hold')
+      .then(response => {
+        console.log(response.data);
+        let data = response.data.cart
+        this.setData(data)
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }
+
+  setData(data) {
+    this.setState(() => {
+      return {
+        isLoaded : true,
+        ReceivedData : data
+      }
+    })
+  }
+
+
+  render() {
+
+    if (this.state.isLoaded) {
+      return (
+        <>
+        <CRow>
+          <CCol>
+            <CCard>
+              <CCardHeader>
+                  Orders which need attention are listed here.
+              </CCardHeader>
+              <CCardBody>
+              <CDataTable
+                items={this.state.ReceivedData}
+                fields={fields}
+                itemsPerPage={10}
+                pagination
+                scopedSlots = {{
+                  'address':
+                      item => (
+                          <td>
+                              {TrimAddress(item.address)}
+                          </td>
+                      )
+                  ,
+                  'Amount':
+                      item => (
+                          <td>
+                              {item.Amount} Rs
+                          </td>
+                      )
+                  ,
+                  'Status':
+                    (item)=>(
+                      <td>
+                        <CBadge color={getBadge(item.Status)}>
+                          {getApproval(item.Status)}
+                        </CBadge>
+                      </td>
+                    ),
+                  'action':
+                    (item)=> (
+                      <td>
+                          <Link to={{
+                            pathname: '/view/order',
+                            YeID: item.id
+                          }}>
+                              <CButton block shape="pill" size="sm" color="primary" className="">View</CButton>
+                          </Link>
+                      </td>
+                    )
+                }}
+              />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </>
+      )
+    } else {
+      return (
+        <>
+          <CRow>
+            <CCol>
+              <CCard>
+                <CCardHeader>
+                    All Product are listed here.
+                </CCardHeader>
+                <CCardBody>
+                  <center>
+                    <CSpinner
+                      color="primary"
+                      style={{width:'4rem', height:'4rem'}}
+                    />
+                  </center>
+                </CCardBody>
+              </CCard>
+            </CCol>
+          </CRow>
+        </>
+      )
+    }    
+  }
+}

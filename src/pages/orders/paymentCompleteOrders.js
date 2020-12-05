@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {
   CBadge,
@@ -8,12 +8,14 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CButton
+  CButton,
+  CSpinner
 } from '@coreui/react'
 
-import usersData from '../api/orders/ongoingOrder'
+// import usersData from '../api/orders/ongoingOrder'
+import Axios from 'axios'
 
-const PendingData = usersData.filter(user => user.status === 'Active' || user.status === "Inactive")
+// const PendingData = usersData.filter(user => user.status === 'Active' || user.status === "Inactive")
 
 const getBadge = status => {
   switch (status) {
@@ -35,48 +37,137 @@ const getApproval = status => {
     }
 }
 
-const fields = ['name','amount', 'address', 'status', 'action']
 
-const Tables = () => {
-  return (
-    <>
-      <CRow>
-        <CCol>
-          <CCard>
-            <CCardHeader>
-                Orders whose payments received successfully are listed here.
-            </CCardHeader>
-            <CCardBody>
-            <CDataTable
-              items={PendingData}
-              fields={fields}
-              itemsPerPage={10}
-              pagination
-              scopedSlots = {{
-                'status':
-                  (item)=>(
-                    <td>
-                      <CBadge color={getBadge(item.status)}>
-                        {getApproval(item.status)}
-                      </CBadge>
-                    </td>
-                  ),
-                'action':
-                  ()=> (
-                    <td>
-                        <Link to="/view/order">
-                            <CButton block shape="pill" size="sm" color="primary" className="">View</CButton>
-                        </Link>
-                    </td>
-                  )
-              }}
-            />
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-    </>
-  )
+const TrimAddress = address => {
+  if(address.length > 40) return address.substring(0,40) + "......"
+  return address
 }
 
-export default Tables
+const fields = ['name','Amount', 'address', 'Status', 'action']
+
+export default class paymentCompleteOrders extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      isLoaded : false,
+      ReceivedData : {}
+    }
+
+    this.setData = this.setData.bind(this)
+  }
+
+  componentDidMount() {
+    this.fatchData()
+  }
+
+  fatchData() {
+    Axios.get('https://coreapi.aaitheantiquebake.com/order/all/complete')
+      .then(response => {
+        console.log(response.data);
+        let data = response.data.cart
+        this.setData(data)
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }
+
+  setData(data) {
+    this.setState(() => {
+      return {
+        isLoaded : true,
+        ReceivedData : data
+      }
+    })
+  } 
+
+
+  render() {
+    if (this.state.isLoaded) {
+      return (
+        <>
+        <CRow>
+          <CCol>
+            <CCard>
+              <CCardHeader>
+                Orders whose payments received successfully are listed here.
+              </CCardHeader>
+              <CCardBody>
+              <CDataTable
+                items={this.state.ReceivedData}
+                fields={fields}
+                itemsPerPage={10}
+                pagination
+                scopedSlots = {{
+                  'address':
+                      item => (
+                          <td>
+                              {TrimAddress(item.address)}
+                          </td>
+                      )
+                  ,
+                  'Amount':
+                      item => (
+                          <td>
+                              {item.Amount} Rs
+                          </td>
+                      )
+                  ,
+                  'Status':
+                    (item)=>(
+                      <td>
+                        <CBadge color={getBadge(item.Status)}>
+                          {getApproval(item.Status)}
+                        </CBadge>
+                      </td>
+                    ),
+                  'action':
+                    (item)=> (
+                      <td>
+                          <Link to={{
+                            pathname: '/view/order',
+                            YeID: item.id
+                          }}>
+                              <CButton block shape="pill" size="sm" color="primary" className="">View</CButton>
+                          </Link>
+                      </td>
+                    )
+                }}
+              />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </>
+      )
+    } else {
+      return (
+        <>
+          <CRow>
+            <CCol>
+              <CCard>
+                <CCardHeader>
+                    All Product are listed here.
+                </CCardHeader>
+                <CCardBody>
+                  <center>
+                    <CSpinner
+                      color="primary"
+                      style={{width:'4rem', height:'4rem'}}
+                    />
+                  </center>
+                </CCardBody>
+              </CCard>
+            </CCol>
+          </CRow>
+        </>
+      )
+    }  
+  }
+}
+
