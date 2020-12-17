@@ -1,6 +1,7 @@
 {
   "name": "projectaai",
   "version": "1.0.0",
+  "homepage": "http://team.aaitheantiquebake.com/",
   "description": "Admin Panel of The Project AAI",
   "author": {
     "name": "SoftWiders",
@@ -12,7 +13,6 @@
       "url": "https://github.com/orgs/coreui/people"
     }
   ],
-  "homepage": ".",
   "license": "MIT",
   "private": true,
   "repository": {
