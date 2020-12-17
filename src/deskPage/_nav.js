@@ -49,27 +49,10 @@ export default [
     icon: 'cil-calendar',
   },
   {
-    _tag: 'CSidebarNavDropdown',
+    _tag: 'CSidebarNavItem',
     name: 'Party order',
-    route: '/orders',
+    to: '/orders/party',
     icon: 'cil-cursor',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Ongoing order',
-        to: '/orders/ongoing',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Completed Order',
-        to: '/orders/completed',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Rejected Order',
-        to: '/orders/rejected',
-      }
-    ],
   },
   {
     _tag: 'CSidebarNavTitle',

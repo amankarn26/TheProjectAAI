@@ -7,9 +7,7 @@ const PendingApprovalOrder = lazy(() => import('./pages/orders/pendingApprovalOr
 const PaymentCompletedOrder = lazy(() => import('./pages/orders/paymentCompleteOrders'))
 const RegularOrder = lazy(() => import('./pages/orders/regularOrder'))
 const scheduledOrder = lazy(() => import('./pages/orders/scheduleOrder'))
-const OngoingPartyOrder = lazy(() => import('./pages/orders/ongoingPartyOrder'))
 const CompletedPartyOrder = lazy(() => import('./pages/orders/completedPartyOrder'))
-const RejectedPartyOrder = lazy(() => import('./pages/orders/rejectedPartyOrder'))
 const ViewOrder = lazy(() => import('./pages/orders/viewOrder'))
 
 const AllProduct = lazy(() => import('./pages/product/productList'))
@@ -40,10 +38,7 @@ const routes = [
   { path: '/pending/completed', name: 'Completed Payment', component: PaymentCompletedOrder, exact: true },
   { path: '/regular', name: 'Regular Order', component: RegularOrder, exact: true },
   { path: '/schedule', name: 'Schedule Order', component: scheduledOrder, exact: true },
-  { path: '/orders', name: 'Party Order', component: OngoingPartyOrder, exact: true },
-  { path: '/orders/ongoing', name: 'Ongoing Order', component: OngoingPartyOrder, exact: true },
-  { path: '/orders/completed', name: 'Completed Order', component: CompletedPartyOrder, exact: true },
-  { path: '/orders/rejected', name: 'Rejected Order', component: RejectedPartyOrder, exact: true },
+  { path: '/orders/party', name: 'Party Order', component: CompletedPartyOrder, exact: true },
   { path: '/view/order', name: 'Order Details', component: ViewOrder, exact: true },
   
   { path: '/operation', name: 'Operation', component: AllProduct, exact: true },

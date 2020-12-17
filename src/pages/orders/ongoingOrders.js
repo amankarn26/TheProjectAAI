@@ -17,20 +17,20 @@ import Axios from 'axios'
 
 const getBadge = status => {
   switch (status) {
-    case 'Active': return 'success'
-    case 'Inactive': return 'secondary'
+    case 'onway': return 'success'
+    case 'Preparing': return 'secondary'
     case 'Hold': return 'primary'
-    case 'Banned': return 'danger'
+    case 'Pending': return 'danger'
     default: return 'warning'
   }
 }
 
 const getApproval = status => {
     switch (status) {
-        case 'Active': return 'On Way'
-        case 'Inactive': return 'Preparing'
+        case 'onway': return 'On Way'
+        case 'Preparing': return 'Preparing'
         case 'Hold': return 'Approval Pending'
-        case 'Banned': return 'Rejected'
+        case 'Pending': return 'Waiting'
         default: return 'Unusual Data'
     }
 }
