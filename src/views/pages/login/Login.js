@@ -78,6 +78,7 @@ class LoginForm extends React.Component {
             'success'
           )
           this.setState({isLoading : false})
+          window.location.reload(true);
         }
       })
       .catch(function (error) {
