@@ -20,7 +20,6 @@ import {
   TheHeaderDropdown,
   TheHeaderDropdownMssg,
   TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
 }  from './index'
 
 const TheHeader = () => {
@@ -53,10 +52,10 @@ const TheHeader = () => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
+          <CHeaderNavLink to="/homepage">Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/users">Users</CHeaderNavLink>
+          <CHeaderNavLink to="/operation/user">Users</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink>Settings</CHeaderNavLink>
@@ -65,7 +64,7 @@ const TheHeader = () => {
 
       <CHeaderNav className="px-3">
         <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/>
+        {/* <TheHeaderDropdownTasks/> */}
         <TheHeaderDropdownMssg/>
         <TheHeaderDropdown/>
       </CHeaderNav>
@@ -82,7 +81,7 @@ const TheHeader = () => {
             <CLink 
               className="c-subheader-nav-link" 
               aria-current="page" 
-              to="/dashboard"
+              to="/homepage"
             >
               <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
             </CLink>

@@ -10,7 +10,7 @@ import {
 import CIcon from '@coreui/icons-react'
 
 const TheHeaderDropdownNotif = () => {
-  const itemsCount = 5
+  const itemsCount = 0
   return (
     <CDropdown
       inNav

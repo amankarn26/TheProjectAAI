@@ -27,8 +27,8 @@ const Dashboard = () => {
         <CCardBody>
           <CRow>
             <CCol sm="5">
-              <h4 id="traffic" className="card-title mb-0">Traffic</h4>
-              <div className="small text-muted">November 2017</div>
+              <h4 id="traffic" className="card-title mb-0">Orders</h4>
+              <div className="small text-muted">April 2021</div>
             </CCol>
             <CCol sm="7" className="d-none d-md-block">
               <CButton color="primary" className="float-right">
@@ -55,7 +55,7 @@ const Dashboard = () => {
         <CCardFooter>
           <CRow className="text-center">
             <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Visits</div>
+              <div className="text-muted">Accounts</div>
               <strong>29.703 Users (40%)</strong>
               <CProgress
                 className="progress-xs mt-2"
@@ -65,7 +65,7 @@ const Dashboard = () => {
               />
             </CCol>
             <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Unique</div>
+              <div className="text-muted">New</div>
               <strong>24.093 Users (20%)</strong>
               <CProgress
                 className="progress-xs mt-2"
@@ -75,7 +75,7 @@ const Dashboard = () => {
               />
             </CCol>
             <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">Pageviews</div>
+              <div className="text-muted">Order</div>
               <strong>78.706 Views (60%)</strong>
               <CProgress
                 className="progress-xs mt-2"
@@ -85,7 +85,7 @@ const Dashboard = () => {
               />
             </CCol>
             <CCol md sm="12" className="mb-sm-2 mb-0">
-              <div className="text-muted">New Users</div>
+              <div className="text-muted">New Orders</div>
               <strong>22.123 Users (80%)</strong>
               <CProgress
                 className="progress-xs mt-2"
@@ -95,7 +95,7 @@ const Dashboard = () => {
               />
             </CCol>
             <CCol md sm="12" className="mb-sm-2 mb-0 d-md-down-none">
-              <div className="text-muted">Bounce Rate</div>
+              <div className="text-muted">Product</div>
               <strong>Average Rate (40.15%)</strong>
               <CProgress
                 className="progress-xs mt-2"
@@ -107,13 +107,13 @@ const Dashboard = () => {
         </CCardFooter>
       </CCard>
 
-      <WidgetsBrand withCharts/>
+      {/* <WidgetsBrand withCharts/> */}
 
       <CRow>
         <CCol>
           <CCard>
             <CCardHeader>
-              Traffic {' & '} Sales
+              Users {' & '} Sales (3 Month)
             </CCardHeader>
             <CCardBody>
               <CRow>
@@ -122,14 +122,14 @@ const Dashboard = () => {
                   <CRow>
                     <CCol sm="6">
                       <CCallout color="info">
-                        <small className="text-muted">New Clients</small>
+                        <small className="text-muted">New User</small>
                         <br />
                         <strong className="h4">9,123</strong>
                       </CCallout>
                     </CCol>
                     <CCol sm="6">
                       <CCallout color="danger">
-                        <small className="text-muted">Recurring Clients</small>
+                        <small className="text-muted">Recurring User</small>
                         <br />
                         <strong className="h4">22,643</strong>
                       </CCallout>
@@ -231,14 +231,14 @@ const Dashboard = () => {
                   <CRow>
                     <CCol sm="6">
                       <CCallout color="warning">
-                        <small className="text-muted">Pageviews</small>
+                        <small className="text-muted">Earning</small>
                         <br />
                         <strong className="h4">78,623</strong>
                       </CCallout>
                     </CCol>
                     <CCol sm="6">
                       <CCallout color="success">
-                        <small className="text-muted">Organic</small>
+                        <small className="text-muted">Pending</small>
                         <br />
                         <strong className="h4">49,123</strong>
                       </CCallout>
@@ -250,7 +250,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-header">
                       <CIcon className="progress-group-icon" name="cil-user" />
-                      <span className="title">Male</span>
+                      <span className="title">Case on delivery</span>
                       <span className="ml-auto font-weight-bold">43%</span>
                     </div>
                     <div className="progress-group-bars">
@@ -260,7 +260,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-5">
                     <div className="progress-group-header">
                       <CIcon className="progress-group-icon" name="cil-user-female" />
-                      <span className="title">Female</span>
+                      <span className="title">Online Payment</span>
                       <span className="ml-auto font-weight-bold">37%</span>
                     </div>
                     <div className="progress-group-bars">
@@ -270,7 +270,7 @@ const Dashboard = () => {
                   <div className="progress-group">
                     <div className="progress-group-header">
                       <CIcon className="progress-group-icon" name="cil-globe-alt" />
-                      <span className="title">Organic Search</span>
+                      <span className="title">This Year Earning</span>
                       <span className="ml-auto font-weight-bold">191,235 <span className="text-muted small">(56%)</span></span>
                     </div>
                     <div className="progress-group-bars">
@@ -281,8 +281,8 @@ const Dashboard = () => {
 
                   <div className="progress-group">
                     <div className="progress-group-header">
-                      <CIcon name="cib-facebook" className="progress-group-icon" />
-                      <span className="title">Facebook</span>
+                      <CIcon name="cil-globe-alt" className="progress-group-icon" />
+                      <span className="title">This Month</span>
                       <span className="ml-auto font-weight-bold">51,223 <span className="text-muted small">(15%)</span></span>
                     </div>
                     <div className="progress-group-bars">
@@ -291,8 +291,8 @@ const Dashboard = () => {
                   </div>
                   <div className="progress-group">
                     <div className="progress-group-header">
-                      <CIcon name="cib-twitter" className="progress-group-icon" />
-                      <span className="title">Twitter</span>
+                      <CIcon name="cil-globe-alt" className="progress-group-icon" />
+                      <span className="title">Last Month</span>
                       <span className="ml-auto font-weight-bold">37,564 <span className="text-muted small">(11%)</span></span>
                     </div>
                     <div className="progress-group-bars">
@@ -301,8 +301,8 @@ const Dashboard = () => {
                   </div>
                   <div className="progress-group">
                     <div className="progress-group-header">
-                      <CIcon name="cib-linkedin" className="progress-group-icon" />
-                      <span className="title">LinkedIn</span>
+                      <CIcon name="cil-globe-alt" className="progress-group-icon" />
+                      <span className="title">Second Last Month</span>
                       <span className="ml-auto font-weight-bold">27,319 <span className="text-muted small">(8%)</span></span>
                     </div>
                     <div className="progress-group-bars">
@@ -320,7 +320,7 @@ const Dashboard = () => {
 
               <br />
 
-              <table className="table table-hover table-outline mb-0 d-none d-sm-table">
+              {/* <table className="table table-hover table-outline mb-0 d-none d-sm-table">
                 <thead className="thead-light">
                   <tr>
                     <th className="text-center"><CIcon name="cil-people" /></th>
@@ -544,7 +544,7 @@ const Dashboard = () => {
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </table> */}
 
             </CCardBody>
           </CCard>

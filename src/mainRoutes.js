@@ -28,7 +28,7 @@ const ViewCharges = lazy(() => import('./pages/charges/charges'))
 
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Home' ,component: Dashboard },
   { path: '/homepage', name: 'HomePage', component: Dashboard },
   { path: '/view', name: 'Show Detail', component: Dashboard, exact: true },
 

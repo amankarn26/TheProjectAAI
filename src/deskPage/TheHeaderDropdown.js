@@ -19,9 +19,9 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={'avatars/7.jpg'}
             className="c-avatar-img"
-            alt="admin@bootstrapmaster.com"
+            alt="admin@aaitheantiquebake.com"
           />
         </div>
       </CDropdownToggle>
@@ -32,26 +32,25 @@ const TheHeaderDropdown = () => {
           color="light"
           className="text-center"
         >
-          <strong>Account</strong>
+          <strong>Users</strong>
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-bell" className="mfe-2" /> 
-          Updates
-          <CBadge color="info" className="mfs-auto">42</CBadge>
+          Delivery Person
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-envelope-open" className="mfe-2" /> 
-          Messages
+          Payment
           <CBadge color="success" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-task" className="mfe-2" /> 
-          Tasks
+          Salary
           <CBadge color="danger" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-comment-square" className="mfe-2" /> 
-          Comments
+          Profit
           <CBadge color="warning" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem
@@ -60,7 +59,7 @@ const TheHeaderDropdown = () => {
           color="light"
           className="text-center"
         >
-          <strong>Settings</strong>
+          <strong>Important</strong>
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-user" className="mfe-2" />Profile
@@ -76,7 +75,7 @@ const TheHeaderDropdown = () => {
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-file" className="mfe-2" /> 
-          Projects
+          Busy Slot
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem divider />
